@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="Web site created using create-react-app" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="face-api.js"></script>
+    <link rel="stylesheet" href="{{url_for('static',filename='css/tryout.css')}}">
+
+    <title>AR App</title>
+</head>
+
+<body>
+    <div class="ar-window">
+        <img id="bg" style="transform: scale(2.0); margin-top:20%;" width=1200px height=900px src="{{ url_for('video_feed') }}">
+    </div>
+//-webkit-transform: scaleX(-1.0);
+    <div class="App">
+        <a href="{{ url_for('triallist') }}">
+            <img src="{{url_for('static',filename='images/arrow_back_24px.png')}}" class="arrow">
+        </a>
+        
+        <a href="{{ url_for('checkout') }}">
+            <div class="btn1">
+                <h1 class="button">CHECKOUT</h1>
+            </div>
+        </a>
+
+        <!-- <div class="textbackground">
+            <h1 class="text">Press anywhere on screen to click a photo</h1>
+        </div> -->
+
+        <button class="addtocart" id="cartbutton" value="cart">
+            <img src="{{url_for('static',filename='images/bag.png')}}" class="bag_img">
+        </button>
+
+        <div class="addphoto">
+            <img src="{{url_for('static',filename='images/icons8-add-image-30.png')}}" class="images">
+        </div>
+
+        <div class="medium-4  columns" id="cart">
+
+            <div class="cart">
+                <div class="row">
+                    <div class="medium-6 columns">
+                        <button class="tiny secondary" id="clear">Clear the cart</button>
+                    </div>
+
+                </div>
+                <div id="cartItems">Loading cart...</div>
+                Total price: <strong id="totalPrice">0 $</strong>
+            </div>
+
+        </div>
+
+        <div class="addproduct">
+            <h1>All Products </h1>
+        </div>
+
+        <img class="arrow2" src="{{url_for('static',filename='images/expand_more_24px.png')}}">
+
+        <button class="addbutton" onclick="location.href='{{ url_for('categories') }}'">
+            <h1 class="add">+ Add Product</h1>
+        </button>
+
+        <div class="lips">Lips</div>
+
+        <hr class="lipsline">
+
+        <div class="box1">
+            <h1 class="name1">PAC Smudge Me Not Lipstick</h1>
+            <img src="{{url_for('static',filename='images/color1.png')}}" class="smallcolor1">
+            <div class="slidecontainer">
+                <input type="range" min="20" max="100" value="60" class="slider" id="myRange" onchange ="updatePigmentation()">
+            </div>
+            <h1 class="price1">₹450/-</h1>
+            <img class="dot1" src="{{url_for('static',filename='images/dot.png',me='')}}">
+            <img class="dot2" src="{{url_for('static',filename='images/dot.png',me='')}}">
+            <img class="dot3" src="{{url_for('static',filename='images/dot.png',me='')}}">
+            <h1 class="othershades">Other Shades</h1>
+            <button class="color1" id="color1"></button>
+            <button class="color2" onClick="updateColor(144,0,31)"></button>
+            <button class="color3" onClick="updateColor(219,7,52)"></button>
+            <button class="color4" onClick="updateColor(163,14,45)"></button>
+            <button class="color5" onClick="updateColor(114,22,41)"></button>
+            <button class="color6" onClick="updateColor(109,5,5)"></button>
+            <button class="color7" onClick="updateColor(65,0,14)"></button>
+            <div class="product medium-4 columns" dat-image="{{url_for('static',filename='images/pac1.jpg')}}" data-name="PAC Smudge Me Not Lipstick"
+                data-price="450" data-id="0">
+                <img class="lips1" src="{{url_for('static',filename='images/pac1.jpg')}}" alt="" />
+                <input type="hidden" class="count" value="1" />
+                <button class="btn2">
+                    <h1 class="addtobag">Add to Bag</h1>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="box2">
+        <h1 class="name2">Soft Matte Cream Lipstick</h1>
+        <button class="smallcolor3"></button>
+        <h1 class="price2">₹635/-</h1>
+        <img class="dot4" src="{{url_for('static',filename='images/dot.png')}}">
+        <img class="dot5" src="{{url_for('static',filename='images/dot.png')}}">
+        <img class="dot6" src="{{url_for('static',filename='images/dot.png')}}">
+        <!-- <button class="btn3">
+                <h1 class="addtobag2">Add to Bag</h1>
+            </button>-->
+        <div class="product medium-4 columns" data-name="Soft Matte Cream Lipstick" data-price="653" data-id="1">
+            <img class="lips2" src="{{url_for('static',filename='images/pac2.jpg')}}" alt="" />
+            <input type="hidden" class="count" value="1" />
+            <button class="btn3">
+                <h1 class="addtobag2">Add to Bag</h1>
+            </button>
+        </div>
+    </div>
+
+    <!-- <div class="face">Face</div>
+        <hr class="faceline"> -->
+
+    <!-- <div class="box3"></div> -->
+
+
+    </div>
+
+    
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js'></script>
+    <script src="javascript/function.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+
+    <script type="text/javascript">
+
+        $("#cart").hide();
+        $("#cartbutton").click(function () {
+            $("#cart").toggle();
+        });
+
+    </script>
+</body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+
+
+<script>
+    var ctx
+   
+    let fillColor = "630015";
+    let fillPigmenation = '99';
+
+
+    function updateColor(red,green,blue){
+        console.log('called');
+      var data = new FormData();
+      data.append('red',red);
+      data.append('green',green);
+      data.append('blue',blue);
+      data.append('pigment',parseFloat($('#myRange').val())/100);
+
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          document.getElementById("demo").innerHTML =
+          this.responseText;
+        }
+      };
+      xhttp.open("POST", "{{ url_for('get_data') }}", true);
+      xhttp.send(data);
+    }
+
+    function updatePigmentation(){
+
+      var pigment = parseFloat($('#myRange').val())/100;
+      var data = new FormData();
+      data.append('red',-1);
+      data.append('green',-1);
+      data.append('blue',-1);
+      data.append('pigment',pigment);
+      
+
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          document.getElementById("demo").innerHTML =
+          this.responseText;
+        }
+      };
+      xhttp.open("POST", "{{ url_for('get_data') }}", true);
+      xhttp.send(data);
+        
+    }
+
+   
+</script>
+
+</html>

@@ -1,0 +1,1 @@
+cv2.addWeighted(frame, 0.3, output, 1 - 0.3,0, output)
